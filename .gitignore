@@ -1,0 +1,65 @@
+# Compilados Delphi
+*.~*
+*.dcu
+*.dcp
+*.dcuil
+*.exe
+*.dll
+*.bpl
+*.drc
+*.dres
+*.map
+*.identcache
+*.local
+*.tds
+*.dproj.local
+*.groupproj.local
+*.a
+*.lib
+*.so
+*.o
+*.rsm
+
+# Arquivos de backup
+*.bak
+*.old
+
+# Arquivos de cache/temporários
+__history/
+__recovery/
+*.stat
+*.tvsconfig
+*.ipch
+*.log
+
+# Arquivos de configurações do Delphi IDE
+*.dsk
+*.dof
+*.cfg
+*.tvsconfig
+*.identcache
+*.tmp
+*.rs~
+
+# Arquivos do Git
+*.orig
+
+# Pastas geradas automaticamente
+Win32/
+Win64/
+Debug/
+Release/
+x64/
+x86/
+
+# Diretórios binários ou de distribuição (caso use)
+bin/
+build/
+dist/
+out/
+
+# Delphi IDE project upgrade backup
+*_UpgradeBackup/
+
+# Exclui configurações específicas do usuário
+*.user
