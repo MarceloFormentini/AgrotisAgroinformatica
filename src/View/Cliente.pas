@@ -95,17 +95,20 @@ begin
   if EditCodigo.Text = '' then
     Exit;
 
+  if MessageDlg('Confirma a exclusão do cliente?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+    Exit;
+
   lDataSource := TDataSource.Create(nil);
   try
     FController.Dao(
       FController.Entity.Pedido.SetCodigoCliente(
         StrToInt(EditCodigo.Text)
       )
-    ).ListarPorId.DataSource(lDataSource);
+    ).ListarPor('CODIGO_CLIENTE').DataSource(lDataSource);
 
     if not lDataSource.DataSet.IsEmpty then
     begin
-      ShowMessage('Cliente vínculado a um pedido não pode ser excluido.');
+      ShowMessage('Cliente vínculado a um pedido não pode ser excluído.');
       Exit;
     end;
 
@@ -120,7 +123,7 @@ begin
 
     FController.Dao(lCliente).Excluir;
 
-    ShowMessage('Cliente excluido com sucesso.');
+    ShowMessage('Cliente excluído com sucesso.');
     Close;
   except
     ShowMessage('Erro ao excluir o cliente.');
@@ -201,7 +204,7 @@ procedure TFCliente.EditCodigoKeyPress(Sender: TObject; var Key: Char);
 var
   lDataSource: TDataSource;
 begin
-  if key = #13 then
+  if key <> #13 then
     Exit;
 
   if EditCodigo.Text = '' then

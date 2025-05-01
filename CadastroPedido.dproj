@@ -135,14 +135,6 @@
             <Form>FProduto</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\View\Relatorio.pas">
-            <Form>FRelatorio</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="src\View\Sobre.pas">
-            <Form>FSobre</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="src\utils\utils.uAtributos.pas"/>
         <DCCReference Include="src\utils\utils.uIQuery.pas"/>
         <DCCReference Include="src\utils\utils.uIUtils.pas"/>
@@ -169,6 +161,8 @@
             <Form>FPedido</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\Model\totalizador\model.totalizador.uTotalizadorValor.pas"/>
+        <DCCReference Include="src\Model\totalizador\model.totalizador.uITotalizadorValor.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

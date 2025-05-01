@@ -28,7 +28,7 @@ type
     [Campo('TIPO_OPERACAO'), PK]
     FTipoPedido: String;
 
-    [Campo('VALOR_TOTAL')]
+    [Campo('TOTAL_PEDIDO')]
     FValorTotal: Currency;
 
   public

@@ -27,7 +27,7 @@ type
 
     function Listar: IDao;
     function ListarPorId: IDao;
-    function ListarPor: IDao;
+    function ListarPor(AParam: String): IDao;
     function Excluir: IDao;
     function Atualizar: IDao;
     function Inserir: IDao;
@@ -92,10 +92,10 @@ begin
   FDataSet := FQuery.OneAll(lQuery, []);
 end;
 
-function TDao.ListarPor: IDao;
+function TDao.ListarPor(AParam: String): IDao;
 begin
   Result := Self;
-  var lQuery := TUtils.New(FParent).Query.SelectWithWhere(True);
+  var lQuery := TUtils.New(FParent).Query.SelectWithFixedWhere(AParam);
   FDataSet := FQuery.OneAll(lQuery, FLista);
 end;
 

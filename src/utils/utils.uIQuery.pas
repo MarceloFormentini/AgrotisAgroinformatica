@@ -13,6 +13,7 @@ type
     function Delete: String;
     procedure FieldParameter(var AValue: TDictionary<String, Variant>);
     function SelectWithWhere(AValue: Boolean): String;
+    function SelectWithFixedWhere(AParam: String): string;
   end;
 
 implementation

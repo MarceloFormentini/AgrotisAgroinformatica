@@ -3,7 +3,6 @@ unit Principal;
 interface
 
 uses
-  Sobre,
   Cliente,
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.CategoryButtons, System.ImageList,
@@ -16,23 +15,15 @@ type
     btnSair: TSpeedButton;
     btnMenu: TSpeedButton;
     btnCliente: TSpeedButton;
-    btnRelatorio: TSpeedButton;
     btnPedido: TSpeedButton;
     btnProduto: TSpeedButton;
-    btnSobre: TSpeedButton;
-    btnProdutoAcessoRapido: TButton;
-    btnPedidoAcessoRapido: TButton;
-    btnRelatorioAcessoRapido: TButton;
     ImageList: TImageList;
-    Label1: TLabel;
     procedure btnMenuClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure btnClienteClick(Sender: TObject);
     procedure btnProdutoClick(Sender: TObject);
     procedure btnPedidoClick(Sender: TObject);
-    procedure btnRelatorioClick(Sender: TObject);
-    procedure btnSobreClick(Sender: TObject);
 
   private
     FExpandido: Boolean;
@@ -46,7 +37,7 @@ var
 implementation
 
 uses
-  Produto, Relatorio, Pedido;
+  Produto, Pedido;
 
 {$R *.dfm}
 
@@ -109,30 +100,6 @@ begin
   end;
 end;
 
-procedure TFPrincipal.btnRelatorioClick(Sender: TObject);
-var
-  FRelatorio: TFRelatorio;
-begin
-  FRelatorio := TFRelatorio.Create(Self);
-  try
-    FRelatorio.ShowModal;
-  finally
-    FRelatorio.Free;
-  end;
-end;
-
-procedure TFPrincipal.btnSobreClick(Sender: TObject);
-var
-  FSobre: TFSobre;
-begin
-  FSobre := TFSobre.Create(nil);
-  try
-    FSobre.ShowModal;
-  finally
-    FreeAndNil(FSobre);
-  end;
-end;
-
 procedure TFPrincipal.btnSairClick(Sender: TObject);
 begin
   Close;
@@ -143,8 +110,6 @@ begin
   btnCliente.ShowHint := AValue;
   btnProduto.ShowHint := AValue;
   btnPedido.ShowHint := AValue;
-  btnRelatorio.ShowHint := AValue;
-  btnSobre.ShowHint := AValue;
   btnSair.ShowHint := AValue;
 end;
 

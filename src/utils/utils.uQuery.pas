@@ -24,6 +24,7 @@ type
 
     procedure FieldParameter(var AValue: TDictionary<String, Variant>);
     function SelectWithWhere(AValue: Boolean): string;
+    function SelectWithFixedWhere(AParam: String): string;
     function Insert: String;
     function Update: String;
     function Delete: String;
@@ -233,6 +234,14 @@ begin
     Result := Copy(Result, 0, Length(Result) - 2) + ' ';
     ctxRtti.Free;
   end;
+end;
+
+function TQuery.SelectWithFixedWhere(AParam: String): string;
+begin
+  Result := 'SELECT * FROM ' + NomeTabela;
+
+  if AParam <> '' then
+    Result := Result + ' WHERE ' + AParam + ' = :' + AParam;
 end;
 
 function TQuery.SelectWithWhere(AValue: Boolean): string;

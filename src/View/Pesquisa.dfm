@@ -2,6 +2,7 @@ object FPesquisa: TFPesquisa
   Left = 0
   Top = 0
   BorderStyle = bsNone
+  Caption = 'Pesquisa'
   ClientHeight = 338
   ClientWidth = 682
   Color = clBtnFace
@@ -24,12 +25,13 @@ object FPesquisa: TFPesquisa
     Height = 65
     Align = alTop
     TabOrder = 0
-    object Label1: TLabel
-      Left = 8
-      Top = 35
-      Width = 61
+    object lblPesquisaPor: TLabel
+      Left = 13
+      Top = 19
+      Width = 348
       Height = 13
-      Caption = 'Pesquisa por'
+      AutoSize = False
+      Caption = 'Pesquisa por Descri'#231#227'o'
     end
     object lblPesquisa: TLabel
       Left = 1
@@ -49,7 +51,7 @@ object FPesquisa: TFPesquisa
     end
     object btnPesquisar: TButton
       Left = 535
-      Top = 30
+      Top = 33
       Width = 120
       Height = 25
       Caption = 'Pesquisar'
@@ -57,24 +59,12 @@ object FPesquisa: TFPesquisa
       OnClick = btnPesquisarClick
     end
     object EditPesquisa: TEdit
-      Left = 167
-      Top = 32
-      Width = 362
+      Left = 7
+      Top = 35
+      Width = 522
       Height = 21
       CharCase = ecUpperCase
       TabOrder = 1
-    end
-    object cbxOpcao: TComboBox
-      Left = 75
-      Top = 32
-      Width = 86
-      Height = 21
-      ItemIndex = 0
-      TabOrder = 2
-      Text = 'C'#243'digo'
-      Items.Strings = (
-        'C'#243'digo'
-        'Nome')
     end
   end
   object PanelGrid: TPanel

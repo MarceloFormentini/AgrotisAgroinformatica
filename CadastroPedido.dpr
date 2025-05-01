@@ -16,8 +16,6 @@ uses
   Pesquisa in 'src\View\Pesquisa.pas' {FPesquisa},
   Principal in 'src\View\Principal.pas' {FPrincipal},
   Produto in 'src\View\Produto.pas' {FProduto},
-  Relatorio in 'src\View\Relatorio.pas' {FRelatorio},
-  Sobre in 'src\View\Sobre.pas' {FSobre},
   utils.uAtributos in 'src\utils\utils.uAtributos.pas',
   utils.uIQuery in 'src\utils\utils.uIQuery.pas',
   utils.uIUtils in 'src\utils\utils.uIUtils.pas',
@@ -40,7 +38,9 @@ uses
   model.cep.uIViaCEP in 'src\Model\CEP\model.cep.uIViaCEP.pas',
   model.validacao.uValidadorCampos in 'src\Model\validacao\model.validacao.uValidadorCampos.pas',
   model.validacao.uIValidadorCampos in 'src\Model\validacao\model.validacao.uIValidadorCampos.pas',
-  Pedido in 'src\View\Pedido.pas' {FPedido};
+  Pedido in 'src\View\Pedido.pas' {FPedido},
+  model.totalizador.uTotalizadorValor in 'src\Model\totalizador\model.totalizador.uTotalizadorValor.pas',
+  model.totalizador.uITotalizadorValor in 'src\Model\totalizador\model.totalizador.uITotalizadorValor.pas';
 
 {$R *.res}
 

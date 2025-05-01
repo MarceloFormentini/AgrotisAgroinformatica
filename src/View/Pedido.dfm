@@ -2,7 +2,7 @@ object FPedido: TFPedido
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  Caption = 'FPedido'
+  Caption = 'Pedido'
   ClientHeight = 472
   ClientWidth = 678
   Color = clBtnFace
@@ -14,6 +14,7 @@ object FPedido: TFPedido
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl: TPageControl
@@ -21,7 +22,7 @@ object FPedido: TFPedido
     Top = 0
     Width = 678
     Height = 472
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -167,6 +168,7 @@ object FPedido: TFPedido
           Height = 21
           Hint = 'Cliente'
           TabOrder = 4
+          OnKeyPress = EditCodigoClienteKeyPress
         end
         object EditNomeCliente: TEdit
           Left = 212
@@ -212,7 +214,7 @@ object FPedido: TFPedido
         end
         object btnAvancar: TButton
           Left = 496
-          Top = 8
+          Top = 6
           Width = 120
           Height = 25
           Caption = 'Avan'#231'ar'
@@ -234,12 +236,39 @@ object FPedido: TFPedido
       Caption = 'TabSheet2'
       ImageIndex = 1
       object Panel3: TPanel
-        Left = 288
-        Top = 112
-        Width = 185
+        Left = 0
+        Top = 362
+        Width = 670
         Height = 41
-        Caption = 'Panel3'
+        Align = alBottom
         TabOrder = 0
+        ExplicitTop = 364
+        object Label7: TLabel
+          Left = 503
+          Top = 14
+          Width = 59
+          Height = 13
+          Caption = 'Total Pedido'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
+        object EditTotalPedido: TEdit
+          Left = 565
+          Top = 11
+          Width = 90
+          Height = 21
+          TabStop = False
+          Alignment = taRightJustify
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
       end
       object Panel4: TPanel
         Left = 0
@@ -267,11 +296,206 @@ object FPedido: TFPedido
           OnClick = btnSalvarClick
         end
       end
+      object TPanel
+        Left = 0
+        Top = 0
+        Width = 670
+        Height = 125
+        Align = alTop
+        TabOrder = 2
+        ExplicitTop = -5
+        object Label8: TLabel
+          Left = 24
+          Top = 16
+          Width = 38
+          Height = 13
+          Caption = 'Produto'
+        end
+        object Label9: TLabel
+          Left = 6
+          Top = 48
+          Width = 56
+          Height = 13
+          Caption = 'Quantidade'
+        end
+        object Label10: TLabel
+          Left = 230
+          Top = 48
+          Width = 64
+          Height = 13
+          Caption = 'Valor Unit'#225'rio'
+        end
+        object Label11: TLabel
+          Left = 483
+          Top = 48
+          Width = 49
+          Height = 13
+          Caption = 'Total Item'
+        end
+        object btnPesquisaProduto: TButton
+          Left = 634
+          Top = 13
+          Width = 21
+          Height = 21
+          Hint = 'Pesquisar Produto'
+          ImageIndex = 0
+          Images = ImageList
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          TabStop = False
+          OnClick = btnPesquisaProdutoClick
+        end
+        object btnInserirItem: TButton
+          Left = 187
+          Top = 86
+          Width = 120
+          Height = 25
+          Caption = 'Salvar Item'
+          TabOrder = 6
+          OnClick = btnInserirItemClick
+        end
+        object btnRemoverItem: TButton
+          Left = 513
+          Top = 86
+          Width = 120
+          Height = 25
+          Caption = 'Remover Item'
+          TabOrder = 7
+          OnClick = btnRemoverItemClick
+        end
+        object VALOR_UNITARIO: TDBEdit
+          Left = 296
+          Top = 43
+          Width = 121
+          Height = 21
+          DataField = 'VALOR_UNITARIO'
+          DataSource = DataSource
+          TabOrder = 4
+        end
+        object TOTAL_ITEM: TDBEdit
+          Left = 534
+          Top = 43
+          Width = 121
+          Height = 21
+          TabStop = False
+          DataField = 'TOTAL_ITEM'
+          DataSource = DataSource
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 5
+        end
+        object QUANTIDADE: TDBEdit
+          Left = 68
+          Top = 43
+          Width = 100
+          Height = 21
+          DataField = 'QUANTIDADE'
+          DataSource = DataSource
+          TabOrder = 1
+        end
+        object CODIGO_PRODUTO: TDBEdit
+          Left = 68
+          Top = 13
+          Width = 100
+          Height = 21
+          DataField = 'CODIGO_PRODUTO'
+          DataSource = DataSource
+          TabOrder = 0
+          OnKeyPress = CODIGO_PRODUTOKeyPress
+        end
+        object DESCRICAO: TDBEdit
+          Left = 174
+          Top = 13
+          Width = 459
+          Height = 21
+          TabStop = False
+          CharCase = ecUpperCase
+          DataField = 'DESCRICAO'
+          DataSource = DataSource
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 2
+        end
+        object btnNovoItem: TButton
+          Left = 24
+          Top = 86
+          Width = 120
+          Height = 25
+          Caption = 'Novo Item'
+          TabOrder = 8
+          OnClick = btnNovoItemClick
+        end
+        object btnCancelarItem: TButton
+          Left = 350
+          Top = 86
+          Width = 120
+          Height = 25
+          Caption = 'Cancelar Item'
+          TabOrder = 9
+          OnClick = btnCancelarItemClick
+        end
+      end
+      object Panel5: TPanel
+        Left = 0
+        Top = 125
+        Width = 670
+        Height = 237
+        Align = alClient
+        TabOrder = 3
+        ExplicitLeft = 360
+        ExplicitTop = 256
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+        object GridItensPedido: TDBGrid
+          Left = 1
+          Top = 1
+          Width = 668
+          Height = 235
+          Align = alClient
+          DataSource = DataSource
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgTitleHotTrack]
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'CODIGO_PRODUTO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DESCRICAO'
+              Title.Caption = 'Descri'#231#227'o'
+              Width = 386
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'QUANTIDADE'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VALOR_UNITARIO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TOTAL_ITEM'
+              Visible = True
+            end>
+        end
+      end
     end
   end
   object ImageList: TImageList
-    Left = 480
-    Top = 48
+    Left = 352
+    Top = 240
     Bitmap = {
       494C010101000800040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
@@ -411,5 +635,49 @@ object FPedido: TFPedido
       CFCF000000000000C78F000000000000E01F000000000000F03F000000000000
       FFFF000000000000FFFF00000000000000000000000000000000000000000000
       000000000000}
+  end
+  object DataSource: TDataSource
+    DataSet = ClientDataSet
+    Left = 456
+    Top = 240
+  end
+  object ClientDataSet: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterEdit = ClientDataSetAfterEdit
+    Left = 536
+    Top = 240
+    object ClientDataSetCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+    end
+    object ClientDataSetDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 100
+    end
+    object ClientDataSetQUANTIDADE: TFloatField
+      DisplayLabel = 'Quantidade'
+      FieldName = 'QUANTIDADE'
+      Required = True
+      OnChange = ClientDataSetQUANTIDADEChange
+    end
+    object ClientDataSetVALOR_UNITARIO: TFloatField
+      DisplayLabel = 'Valor Unit'#225'rio'
+      FieldName = 'VALOR_UNITARIO'
+      Required = True
+      OnChange = ClientDataSetVALOR_UNITARIOChange
+      currency = True
+    end
+    object ClientDataSetTOTAL_ITEM: TFloatField
+      DisplayLabel = 'Total Item'
+      FieldName = 'TOTAL_ITEM'
+      currency = True
+    end
+    object ClientDataSetCODIGO_PEDIDO: TIntegerField
+      FieldName = 'CODIGO_PEDIDO'
+    end
+    object ClientDataSetCODIGO_PRODUTO: TIntegerField
+      DisplayLabel = 'Produto'
+      FieldName = 'CODIGO_PRODUTO'
+    end
   end
 end

@@ -2,6 +2,7 @@ object FProduto: TFProduto
   Left = 0
   Top = 0
   BorderStyle = bsNone
+  Caption = 'Produto'
   ClientHeight = 175
   ClientWidth = 531
   Color = clBtnFace

@@ -166,17 +166,20 @@ begin
   if EditCodigo.Text = '' then
     Exit;
 
+  if MessageDlg('Confirma a exclusão do produto?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+    Exit;
+
   lDataSource := TDataSource.Create(nil);
   try
     FController.Dao(
       FController.Entity.PedidoItens.SetCodigoProduto(
         StrToInt(EditCodigo.Text)
       )
-    ).ListarPorId.DataSource(lDataSource);
+    ).ListarPor('CODIGO_PRODUTO').DataSource(lDataSource);
 
     if not lDataSource.DataSet.IsEmpty then
     begin
-      ShowMessage('Produto vínculado a um pedido não pode ser excluido');
+      ShowMessage('Produto vínculado a um pedido não pode ser excluído');
       Exit;
     end;
 
@@ -189,7 +192,7 @@ begin
 
     FController.Dao(lProduto).Excluir;
 
-    ShowMessage('Produto excluido com sucesso.');
+    ShowMessage('Produto excluído com sucesso.');
     Close;
   except
     ShowMessage('Erro ao excluir o produto.');

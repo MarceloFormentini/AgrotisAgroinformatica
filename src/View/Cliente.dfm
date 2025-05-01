@@ -2,6 +2,7 @@ object FCliente: TFCliente
   Left = 0
   Top = 0
   BorderStyle = bsNone
+  Caption = 'Cliente'
   ClientHeight = 307
   ClientWidth = 558
   Color = clBtnFace
@@ -295,7 +296,6 @@ object FCliente: TFCliente
     Height = 41
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 265
     object btnExcluir: TButton
       Left = 16
       Top = 6

@@ -25,7 +25,7 @@ type
     [Campo('VALOR_UNITARIO')]
     FValorUnitario: Currency;
 
-    [Campo('VALOR_TOTAL')]
+    [Campo('TOTAL_ITEM')]
     FValorTotal: Currency;
 
   public

@@ -16,8 +16,7 @@ type
     PanelBottom: TPanel;
     btnPesquisar: TButton;
     EditPesquisa: TEdit;
-    Label1: TLabel;
-    cbxOpcao: TComboBox;
+    lblPesquisaPor: TLabel;
     btnSelecionar: TButton;
     btnFechar: TButton;
     GridPesquisa: TDBGrid;
@@ -40,6 +39,7 @@ type
     procedure PesquisaPedido;
     procedure PesquisaClientePor;
     procedure PesquisaProdutoPor;
+    procedure PesquisaPedidoPor;
     procedure ConfigurarGridCliente;
     procedure ConfigurarGridProduto;
     procedure ConfigurarGridPedido;
@@ -80,16 +80,19 @@ begin
   if TipoPesquisa = 'C' then
   begin
     lblPesquisa.Caption := 'Pesquisa de Cliente';
+    lblPesquisaPor.Caption := 'Pesquisar por Nome';
     PesquisaCliente;
   end
   else if TipoPesquisa = 'PEDIDO' then
   begin
     lblPesquisa.Caption := 'Pesquisa de Pedido';
+    lblPesquisaPor.Caption := 'Pesquisar por Numero Pedido';
     PesquisaPedido;
   end
   else
   begin
     lblPesquisa.Caption := 'Pesquisa de Produto';
+    lblPesquisaPor.Caption := 'Pesquisar por Descrição';
     PesquisaProduto;
   end;
   GridPesquisa.SetFocus;
@@ -118,7 +121,14 @@ end;
 
 procedure TFPesquisa.PesquisaClientePor;
 begin
-//
+  var lCliente := FController.Dao(
+    FController.Entity.Cliente.SetNome(
+      EditPesquisa.Text
+    )
+  ).ListarPor('NOME').DataSource(DataSourcePesquisa);
+
+  CopiarDados(DataSourcePesquisa.DataSet);
+  ConfigurarGridCliente;
 end;
 
 procedure TFPesquisa.PesquisaPedido;
@@ -132,9 +142,30 @@ begin
   ConfigurarGridPedido;
 end;
 
+procedure TFPesquisa.PesquisaPedidoPor;
+var
+  pedido: Integer;
+begin
+  if not TryStrToInt(EditPesquisa.Text, pedido) then
+  begin
+    ShowMessage('Informe o numero do pedido. Digite um número inteiro');
+    EditPesquisa.SetFocus;
+    Exit;
+  end;
+
+  var lCliente := FController.Dao(
+    FController.Entity.Pedido.SetNumeroPedido(
+      pedido
+    )
+  ).ListarPor('NUMERO_PEDIDO').DataSource(DataSourcePesquisa);
+
+  CopiarDados(DataSourcePesquisa.DataSet);
+  ConfigurarGridPedido;
+end;
+
 procedure TFPesquisa.PesquisaProduto;
 begin
-  var lProduto := FController.Dao(
+  FController.Dao(
     FController.Entity.Produto
   ).Listar.DataSource(DataSourcePesquisa);
 
@@ -145,15 +176,27 @@ end;
 
 procedure TFPesquisa.PesquisaProdutoPor;
 begin
-//
+  FController.Dao(
+    FController.Entity.Produto.SetDescricao(
+      EditPesquisa.Text
+    )
+  ).ListarPor('DESCRICAO').DataSource(DataSourcePesquisa);
+
+  CopiarDados(DataSourcePesquisa.DataSet);
+  ConfigurarGridProduto;
 end;
 
 procedure TFPesquisa.btnPesquisarClick(Sender: TObject);
 begin
-//  if TipoPesquisa = 'C' then
-//    PesquisaClientePor
-//  else
-//    PesquisaProdutoPor;
+  if EditPesquisa.Text = '' then
+    Exit;
+
+  if TipoPesquisa = 'C' then
+    PesquisaClientePor
+  else if TipoPesquisa = 'PEDIDO' then
+    PesquisaPedidoPor
+  else
+    PesquisaProdutoPor;
 end;
 
 procedure TFPesquisa.btnSelecionarClick(Sender: TObject);
@@ -257,6 +300,8 @@ var
   i: Integer;
   Field: TField;
 begin
+  if ADataSet.IsEmpty then
+    Exit;
 
   FDataSet.FieldDefs.Clear;
 
@@ -268,8 +313,9 @@ begin
         ADataSet.Fields[i].Required
       );
 
+  FDataSet.Close;
   FDataSet.CreateDataSet;
-
+  FDataSet.Open;
 
   ADataSet.First;
   while not ADataSet.Eof do

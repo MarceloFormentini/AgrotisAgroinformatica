@@ -9,7 +9,7 @@ type
   IDao = interface
     function Listar: IDao;
     function ListarPorId: IDao;
-    function ListarPor: IDao;
+    function ListarPor(AParam: String): IDao;
     function Excluir: IDao;
     function Atualizar: IDao;
     function Inserir: IDao;
