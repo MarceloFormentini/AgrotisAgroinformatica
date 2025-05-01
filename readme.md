@@ -1,19 +1,51 @@
-MVC
-Interface - orientado a interface (cliente, produto, pedido e pedido item)
-classe construtora para cada interface
-	set com const para não haver alteração
-		result := Self; retorna a interface que esta classe esta implementando
+# Agrotis Agroinformática
+Agrotis Agroinformática é um projeto desenvolvido para gerenciar pedidos de clientes, produtos e itens de pedidos. Utilizando a linguagem Delphi e o padrão de arquitetura MVC, o sistema é estruturado para promover uma separação clara entre as camadas de apresentação, negócio e dados, facilitando a manutenção e escalabilidade da aplicação.​
 
-IEntyti - uma interface que vai expor a implementação das classe sem ter a necessidade de acoplar a instancia em outra camada, no caso no Controller ou algo a parte. Como se fosse uma fabrica de métodos (Factory Method)
-	classe construtora - faz o acomplamento apenas em um local. Pega a usabilidade de Ports and Adapters, quem trabalha com a porta é a interface.
+## Arquitetura
+O projeto adota o padrão MVC (Model-View-Controller), com ênfase na orientação a interfaces. Cada entidade (Cliente, Produto, Pedido, Item do Pedido) é representada por uma interface específica, promovendo baixo acoplamento e alta coesão.​
 
-regra de negócio é no model.
+## Principais Componentes
+- **Interfaces de Entidade:** Definem contratos para as entidades, permitindo implementações flexíveis e desacopladas.
 
-## Conexão
-Interface IConnection -> TCustomConnection: qualquer driver de conexão a banco de dados herda do mais ancestrar possível, sendo assim todos herdam de TCustomConnection
+- **Classes Construtoras:** Implementam as interfaces, retornando a própria instância (`result := Self;`), facilitando o encadeamento de métodos e a fluidez na criação de objetos.
 
-TConexaoFiredac -> essa classe trabalha apenas com conexão Firedac, qualquer tipo de conexão., por que a camada mais externa vai ter acesso somente a interface não a conexão concreta.
+- **IEntity:** Interface genérica que expõe a implementação das classes sem acoplar diretamente a instância em outras camadas, seguindo o padrão Factory Method.
 
-Inversão de dependencia: pq a instancia vai estar em outro momento, na hora que for chamado ele vai estar sendo instanciado em outro lugar, qunado vem para a Query já vem com o objeto já instanciado, então só acessa os métodos, não preciso criar. Reduz o acoplamento.
+- **IConnection:** Interface para abstração da conexão com o banco de dados, permitindo a utilização de diferentes drivers de conexão.
 
-ISettings -> pode ser configurado outro servidor
+- **TConexaoFiredac:** Implementação da interface `IConnection` utilizando o componente FireDAC, que herda de `TCustomConnection`, garantindo compatibilidade com diversos bancos de dados.​
+
+## Tecnologias Utilizadas
+- Linguagem: Delphi
+- IDE: Delphi 10.3
+- Padrão de Arquitetura: MVC (Model-View-Controller)
+- Abordagem: Orientação a Interfaces
+- Acesso a Dados: FireDAC
+- Banco de Dados: Compatível com diversos bancos de dados suportados pelo FireDAC​
+
+## Como Executar o Projeto
+1. Pré-requisitos:
+- Delphi instalado (versão compatível com o projeto).
+- Banco de dados configurado e acessível.
+- Componentes necessários (como FireDAC) devidamente instalados.​
+
+2. Passos:
+- Clone o repositório:​
+```
+git clone https://github.com/MarceloFormentini/AgrotisAgroinformatica.git
+```
+- Abra o arquivo CadastroPedido.dpr no Delphi.
+- Configure a conexão com o banco de dados conforme necessário no arquivo `config.ini`.
+
+> [!NOTE]
+> O arquivo `config.ini` deve estar na mesma pasta do executável, com isso o sistema lê o arquivo para a conexão.
+- Compile e execute o projeto.​
+
+## Funcionalidades
+1. **Cadastro de Clientes:** Permite adicionar, editar e remover informações de clientes.
+
+2. **Cadastro de Produtos:** Gerencia os produtos disponíveis para pedidos.
+
+3. **Gestão de Pedidos:** Criação, edição e exclusão de pedidos, associando clientes e produtos.
+
+4. **Itens do Pedido:** Adição de múltiplos produtos a um pedido, com quantidades e valores específicos.
