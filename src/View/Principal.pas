@@ -6,7 +6,8 @@ uses
   Cliente,
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.CategoryButtons, System.ImageList,
-  Vcl.ImgList, Vcl.ExtCtrls, Vcl.WinXCtrls, Vcl.Buttons, Vcl.StdCtrls;
+  Vcl.ImgList, Vcl.ExtCtrls, Vcl.WinXCtrls, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage;
 
 type
   TFPrincipal = class(TForm)
@@ -18,6 +19,7 @@ type
     btnPedido: TSpeedButton;
     btnProduto: TSpeedButton;
     ImageList: TImageList;
+    Image1: TImage;
     procedure btnMenuClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
