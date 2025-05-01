@@ -68,6 +68,7 @@ type
     DESCRICAO: TDBEdit;
     btnNovoItem: TButton;
     btnCancelarItem: TButton;
+    btnExcluir: TButton;
     procedure btnFecharClick(Sender: TObject);
     procedure btnAvancarClick(Sender: TObject);
     procedure btnVoltarClick(Sender: TObject);
@@ -90,6 +91,7 @@ type
     procedure CODIGO_PRODUTOKeyPress(Sender: TObject; var Key: Char);
     procedure btnRemoverItemClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     FController: IController;
     FValidadorCampos: IValidadorCampos;
@@ -146,6 +148,8 @@ end;
 procedure TFPedido.btnNovoClick(Sender: TObject);
 begin
   LimparCampos;
+  btnExcluir.Enabled := False;
+  EditNumeroPedido.SetFocus;
 end;
 
 procedure TFPedido.btnNovoItemClick(Sender: TObject);
@@ -411,6 +415,7 @@ begin
   CheckSaida.Checked := tipoOperacao = 'S';
 
   PesquisarCliente(ADataSet.FieldByName('CODIGO_CLIENTE').AsInteger);
+  btnExcluir.Enabled := True;
 end;
 
 procedure TFPedido.CarregarDadosCliente(ADataSet: TDataSet);
@@ -541,6 +546,7 @@ end;
 procedure TFPedido.FormShow(Sender: TObject);
 begin
   EditNumeroPedido.SetFocus;
+  btnExcluir.Enabled := False;
 end;
 
 procedure TFPedido.LimparCampos;
@@ -606,6 +612,43 @@ begin
   btnInserirItem.Enabled := False;
   btnNovoItem.Enabled := True;
   btnRemoverItem.Enabled := True;
+end;
+
+procedure TFPedido.btnExcluirClick(Sender: TObject);
+begin
+  if MessageDlg('Confirma a exclusão do pedido?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+    Exit;
+
+  try
+    ClientDataSet.DisableControls;
+    try
+      ClientDataSet.First;
+      while not ClientDataSet.Eof do
+      begin
+        var lItensPedidos := FController.Entity
+            .PedidoItens
+            .SetCodigo(ClientDataSetCODIGO.AsInteger);
+
+        FController.Dao(lItensPedidos).Excluir;
+
+        ClientDataSet.Next;
+      end;
+
+      var lPedido := FController.Entity
+        .Pedido
+        .SetCodigo(FCodigoPedido);
+//        .SetNumeroPedido(StrToInt(EditNumeroPedido.Text));
+
+      FController.Dao(lPedido).Excluir;
+    except
+      on E:Exception do
+        ShowMessage('Erro ao excluir pedido. ' + E.Message);
+    end;
+    btnVoltar.Click;
+    btnNovo.Click;
+  finally
+    ClientDataSet.EnableControls;
+  end;
 end;
 
 end.

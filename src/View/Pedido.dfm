@@ -27,10 +27,6 @@ object FPedido: TFPedido
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object PanelPedido: TPanel
         Left = 0
         Top = 0
@@ -39,11 +35,11 @@ object FPedido: TFPedido
         Align = alClient
         TabOrder = 0
         object Label1: TLabel
-          Left = 47
-          Top = 54
-          Width = 32
+          Left = 7
+          Top = 55
+          Width = 72
           Height = 13
-          Caption = 'Pedido'
+          Caption = 'Numero Pedido'
         end
         object Shape: TShape
           Left = 0
@@ -141,15 +137,14 @@ object FPedido: TFPedido
           OnClick = CheckSaidaClick
         end
         object EditNumeroPedido: TEdit
+          Tag = 1
           Left = 85
           Top = 51
           Width = 121
           Height = 21
-          Hint = 
-            'Digito o numero do pedido para pesquisar ou abra a tela de pesqu' +
-            'isa'
+          Hint = 'Numero Pedido'
           ParentShowHint = False
-          ShowHint = True
+          ShowHint = False
           TabOrder = 0
           OnKeyPress = EditNumeroPedidoKeyPress
         end
@@ -207,9 +202,11 @@ object FPedido: TFPedido
         Height = 41
         Align = alBottom
         TabOrder = 1
+        ExplicitLeft = 1
+        ExplicitTop = 409
         object btnFechar: TButton
-          Left = 47
-          Top = 8
+          Left = 15
+          Top = 6
           Width = 120
           Height = 25
           Caption = 'Fechar'
@@ -217,7 +214,7 @@ object FPedido: TFPedido
           OnClick = btnFecharClick
         end
         object btnAvancar: TButton
-          Left = 496
+          Left = 534
           Top = 6
           Width = 120
           Height = 25
@@ -226,8 +223,8 @@ object FPedido: TFPedido
           OnClick = btnAvancarClick
         end
         object btnNovo: TButton
-          Left = 277
-          Top = 8
+          Left = 275
+          Top = 6
           Width = 120
           Height = 25
           Caption = 'Novo'
@@ -239,10 +236,6 @@ object FPedido: TFPedido
     object TabSheet2: TTabSheet
       Caption = 'TabSheet2'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel3: TPanel
         Left = 0
         Top = 362
@@ -250,7 +243,6 @@ object FPedido: TFPedido
         Height = 41
         Align = alBottom
         TabOrder = 0
-        ExplicitTop = 364
         object Label7: TLabel
           Left = 503
           Top = 14
@@ -286,8 +278,8 @@ object FPedido: TFPedido
         Align = alBottom
         TabOrder = 1
         object btnVoltar: TButton
-          Left = 48
-          Top = 8
+          Left = 15
+          Top = 6
           Width = 120
           Height = 25
           Caption = 'Voltar'
@@ -295,13 +287,22 @@ object FPedido: TFPedido
           OnClick = btnVoltarClick
         end
         object btnSalvar: TButton
-          Left = 496
+          Left = 534
           Top = 8
           Width = 120
           Height = 25
           Caption = 'Salvar'
           TabOrder = 1
           OnClick = btnSalvarClick
+        end
+        object btnExcluir: TButton
+          Left = 275
+          Top = 6
+          Width = 120
+          Height = 25
+          Caption = 'Excluir'
+          TabOrder = 2
+          OnClick = btnExcluirClick
         end
       end
       object TPanel
@@ -311,7 +312,6 @@ object FPedido: TFPedido
         Height = 125
         Align = alTop
         TabOrder = 2
-        ExplicitTop = -5
         object Label8: TLabel
           Left = 24
           Top = 16
@@ -451,10 +451,6 @@ object FPedido: TFPedido
         Height = 237
         Align = alClient
         TabOrder = 3
-        ExplicitLeft = 360
-        ExplicitTop = 256
-        ExplicitWidth = 185
-        ExplicitHeight = 41
         object GridItensPedido: TDBGrid
           Left = 1
           Top = 1

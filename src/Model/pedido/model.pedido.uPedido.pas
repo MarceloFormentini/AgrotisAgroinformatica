@@ -16,7 +16,7 @@ type
     [Campo('REFERENCIA')]
     FReferencia: String;
 
-    [Campo('NUMERO_PEDIDO'), PK]
+    [Campo('NUMERO_PEDIDO')]
     FNumeroPedido: Integer;
 
     [Campo('DATA_EMISSAO')]
@@ -25,7 +25,7 @@ type
     [Campo('CODIGO_CLIENTE'), FK]
     FCodigoCliente: Integer;
 
-    [Campo('TIPO_OPERACAO'), PK]
+    [Campo('TIPO_OPERACAO')]
     FTipoPedido: String;
 
     [Campo('TOTAL_PEDIDO')]
