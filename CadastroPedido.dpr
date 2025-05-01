@@ -40,7 +40,8 @@ uses
   model.validacao.uIValidadorCampos in 'src\Model\validacao\model.validacao.uIValidadorCampos.pas',
   Pedido in 'src\View\Pedido.pas' {FPedido},
   model.totalizador.uTotalizadorValor in 'src\Model\totalizador\model.totalizador.uTotalizadorValor.pas',
-  model.totalizador.uITotalizadorValor in 'src\Model\totalizador\model.totalizador.uITotalizadorValor.pas';
+  model.totalizador.uITotalizadorValor in 'src\Model\totalizador\model.totalizador.uITotalizadorValor.pas',
+  utils.uEnum in 'src\utils\utils.uEnum.pas';
 
 {$R *.res}
 

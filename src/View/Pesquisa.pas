@@ -7,7 +7,8 @@ uses
   model.cliente.uICliente,
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
-  Vcl.Grids, Vcl.DBGrids, System.Generics.Collections, Datasnap.DBClient;
+  Vcl.Grids, Vcl.DBGrids, System.Generics.Collections, Datasnap.DBClient,
+  utils.uEnum;
 
 type
   TFPesquisa = class(TForm)
@@ -45,7 +46,7 @@ type
     procedure ConfigurarGridPedido;
     procedure CopiarDados(ADataSet: TDataSet);
   public
-    TipoPesquisa: String;
+    TipoPesquisa: tTipoPesquisa;
     function GetDataSet: TDataSet;
   end;
 
@@ -77,23 +78,25 @@ end;
 
 procedure TFPesquisa.FormShow(Sender: TObject);
 begin
-  if TipoPesquisa = 'C' then
-  begin
-    lblPesquisa.Caption := 'Pesquisa de Cliente';
-    lblPesquisaPor.Caption := 'Pesquisar por Nome';
-    PesquisaCliente;
-  end
-  else if TipoPesquisa = 'PEDIDO' then
-  begin
-    lblPesquisa.Caption := 'Pesquisa de Pedido';
-    lblPesquisaPor.Caption := 'Pesquisar por Numero Pedido';
-    PesquisaPedido;
-  end
-  else
-  begin
-    lblPesquisa.Caption := 'Pesquisa de Produto';
-    lblPesquisaPor.Caption := 'Pesquisar por Descrição';
-    PesquisaProduto;
+  case TipoPesquisa of
+    tpCliente:
+      begin
+        lblPesquisa.Caption := 'Pesquisa de Cliente';
+        lblPesquisaPor.Caption := 'Pesquisar por Nome';
+        PesquisaCliente;
+      end;
+    tpPedido:
+      begin
+        lblPesquisa.Caption := 'Pesquisa de Pedido';
+        lblPesquisaPor.Caption := 'Pesquisar por Numero Pedido';
+        PesquisaPedido;
+      end;
+    tpProduto:
+      begin
+        lblPesquisa.Caption := 'Pesquisa de Produto';
+        lblPesquisaPor.Caption := 'Pesquisar por Descrição';
+        PesquisaProduto;
+      end;
   end;
   GridPesquisa.SetFocus;
 end;
@@ -191,12 +194,14 @@ begin
   if EditPesquisa.Text = '' then
     Exit;
 
-  if TipoPesquisa = 'C' then
-    PesquisaClientePor
-  else if TipoPesquisa = 'PEDIDO' then
-    PesquisaPedidoPor
-  else
-    PesquisaProdutoPor;
+  case TipoPesquisa of
+    tpCliente:
+      PesquisaClientePor;
+    tpPedido:
+      PesquisaPedidoPor;
+    tpProduto:
+      PesquisaProdutoPor;
+  end;
 end;
 
 procedure TFPesquisa.btnSelecionarClick(Sender: TObject);

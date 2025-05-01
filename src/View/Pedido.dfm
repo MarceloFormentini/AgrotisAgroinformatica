@@ -27,6 +27,10 @@ object FPedido: TFPedido
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object PanelPedido: TPanel
         Left = 0
         Top = 0
@@ -235,6 +239,10 @@ object FPedido: TFPedido
     object TabSheet2: TTabSheet
       Caption = 'TabSheet2'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel3: TPanel
         Left = 0
         Top = 362

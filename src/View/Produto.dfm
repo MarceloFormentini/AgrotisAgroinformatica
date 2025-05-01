@@ -133,7 +133,7 @@ object FProduto: TFProduto
     object Label5: TLabel
       Left = 1
       Top = 1
-      Width = 529
+      Width = 133
       Height = 21
       Align = alTop
       Alignment = taCenter
@@ -144,7 +144,6 @@ object FProduto: TFProduto
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitWidth = 133
     end
     object EditCodigo: TEdit
       Left = 103

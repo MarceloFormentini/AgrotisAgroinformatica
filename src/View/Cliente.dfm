@@ -78,7 +78,7 @@ object FCliente: TFCliente
     object Label5: TLabel
       Left = 1
       Top = 1
-      Width = 556
+      Width = 125
       Height = 21
       Align = alTop
       Alignment = taCenter
@@ -89,7 +89,6 @@ object FCliente: TFCliente
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitWidth = 125
     end
     object Label6: TLabel
       Left = 56

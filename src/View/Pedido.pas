@@ -8,7 +8,7 @@ uses
   System.ImageList, Vcl.ImgList, Vcl.Mask, Vcl.DBCtrls,
   controller.uIController, Data.DB, model.validacao.uIValidadorCampos,
   Vcl.Grids, Vcl.DBGrids, Datasnap.DBClient,
-  model.totalizador.uITotalizadorValor;
+  model.totalizador.uITotalizadorValor, utils.uEnum;
 
 type
   TFPedido = class(TForm)
@@ -106,7 +106,7 @@ type
     procedure CarregarDadosProduto(ADataSet: TDataSet);
     procedure PesquisarProduto(AProduto: Integer);
 
-    procedure AbrirPesquisa(AChamada: String);
+    procedure AbrirPesquisa(ATipoPesquisa: tTipoPesquisa);
     procedure PesquisaItensPedido;
     procedure CarregaItensPedido(ADataSet: TDataSet);
 
@@ -160,12 +160,12 @@ end;
 
 procedure TFPedido.btnPesquisaClick(Sender: TObject);
 begin
-  AbrirPesquisa('PEDIDO');
+  AbrirPesquisa(tpPedido);
 end;
 
 procedure TFPedido.btnPesquisaClienteClick(Sender: TObject);
 begin
-  AbrirPesquisa('C');
+  AbrirPesquisa(tpCliente);
 end;
 
 procedure TFPedido.btnPesquisaProdutoClick(Sender: TObject);
@@ -173,7 +173,7 @@ var
   FPesquisa : TFPesquisa;
 begin
   FPesquisa := TFPesquisa.Create(Self);
-  FPesquisa.TipoPesquisa := 'P';
+  FPesquisa.TipoPesquisa := tpPedido;
   try
     if FPesquisa.ShowModal = mrOk then
       CarregarDadosProduto(FPesquisa.GetDataSet);
@@ -558,19 +558,21 @@ begin
   ClientDataSet.Open;
 end;
 
-procedure TFPedido.AbrirPesquisa(AChamada: String);
+procedure TFPedido.AbrirPesquisa(ATipoPesquisa: tTipoPesquisa);
 var
   FPesquisa: TFPesquisa;
 begin
   FPesquisa := TFPesquisa.Create(Self);
-  FPesquisa.TipoPesquisa := AChamada;
+  FPesquisa.TipoPesquisa := ATipoPesquisa;
   try
     if FPesquisa.ShowModal = mrOk then
     begin
-      if AChamada = 'PEDIDO'then
-        CarregarDados(FPesquisa.GetDataSet)
-      else
-        CarregarDadosCliente(FPesquisa.GetDataSet);
+      case ATipoPesquisa of
+        tpCliente:
+          CarregarDadosCliente(FPesquisa.GetDataSet);
+        tpPedido:
+          CarregarDados(FPesquisa.GetDataSet);
+      end;
     end;
   finally
     FPesquisa.Free;

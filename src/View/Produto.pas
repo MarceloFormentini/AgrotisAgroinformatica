@@ -49,7 +49,8 @@ var
 implementation
 
 uses
-  Pesquisa, controller.uController, model.validacao.uValidadorCampos;
+  Pesquisa, controller.uController, model.validacao.uValidadorCampos,
+  utils.uEnum;
 
 {$R *.dfm}
 
@@ -64,7 +65,7 @@ var
   FPesquisa : TFPesquisa;
 begin
   FPesquisa := TFPesquisa.Create(Self);
-  FPesquisa.TipoPesquisa := 'P';
+  FPesquisa.TipoPesquisa := tpProduto;
   try
     if FPesquisa.ShowModal = mrOk then
       CarregarCampos(FPesquisa.GetDataSet);

@@ -66,7 +66,7 @@ implementation
 
 uses
   controller.uController, model.cep.uViaCEP, model.cep.uIViaCEP,
-  model.validacao.uValidadorCampos;
+  model.validacao.uValidadorCampos, utils.uEnum;
 
 {$R *.dfm}
 
@@ -146,7 +146,7 @@ var
   FPesquisa: TFPesquisa;
 begin
   FPesquisa := TFPesquisa.Create(Self);
-  FPesquisa.TipoPesquisa := 'C';
+  FPesquisa.TipoPesquisa := tpCliente;
   try
     if FPesquisa.ShowModal = mrOk then
       CarregarCampos(FPesquisa.GetDataSet);
